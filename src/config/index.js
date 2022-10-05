@@ -1,4 +1,4 @@
-module.exports = {
+const env = {
     NODE_ENV: process.env.NODE_ENV || 'development',
     PORT: process.env.PORT || 8080,
     AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID || 'DUMMYIDEXAMPLE',
@@ -7,7 +7,11 @@ module.exports = {
     DYNAMODB_ENDPOINT: process.env.DYNAMODB_ENDPOINT || 'http://dynamodb-local:8000',
     JWT_SECRET: process.env.JWT_SECRET || 'qop',
     MASTER_KEY: process.env.MASTER_KEY || '123456',
-    isProduction: () => {
-        return this.NODE_ENV === 'production'
+}
+
+module.exports = {
+    ...env,
+    isProduction: function () {
+        return env.NODE_ENV === 'production'
     }
 }
