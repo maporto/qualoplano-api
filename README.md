@@ -12,7 +12,10 @@ Essa api foi desenvolvida para suportar o monitoramento de um projeto maior ("Qu
 
 ### Rodando o projeto
 
+- Após baixar o projeto rodar os seguintes comandos
+
 ```
+npm i
 mkdir -p ./docker/dynamodb
 sudo chmod 777 ./docker/dynamodb
 docker-compose up
@@ -55,5 +58,33 @@ curl --request POST \
 ```
 curl --request GET \
   --url http://localhost:8080/users \
+  --header 'x-access-token: {{TOKEN_RETORNADO_NO_LOGIN}}'
+```
+
+### Create Event
+
+- Endpoint criado para criação de eventos por usuarios não logados e utilizando a plataforma
+
+```
+curl --request POST \
+  --url http://localhost:8080/users \
+  --header 'content-type: application/json' \
+  --header 'x-access-token: {{TOKEN_RETORNADO_NO_LOGIN}}' \
+  --data '{
+	"user_session": "123",
+	"name": "compare",
+	"value": {
+		"candidate": "Ciro"
+	}
+}'
+```
+
+### Get Events
+
+- Endpoint criado para uso interno de visualização dos usuarios
+
+```
+curl --request GET \
+  --url http://localhost:8080/events \
   --header 'x-access-token: {{TOKEN_RETORNADO_NO_LOGIN}}'
 ```
